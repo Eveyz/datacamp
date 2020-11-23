@@ -3,6 +3,7 @@ import EditorComponent from '../editor/editor'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import CourseHeader from '../layouts/CourseHeader'
+import CourseStepContent from './CourseStepContent'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -14,8 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    backgroundColor: 'rgb(229, 225, 218)'
   },
   editorpaper: {
     backgroundColor: '#05192D'
@@ -31,12 +31,13 @@ const CoursePage = props => {
       <Grid container spacing={1} className={classes.container}>
         <Grid item xs={5}>
           <Paper className={classes.paper}>
-            Course
-            Load a Pandas Dataframe
+            <CourseStepContent />
           </Paper>
         </Grid>
         <Grid item xs={7}>
-          <Paper className={classes.editorpaper}><EditorComponent /></Paper>
+          <Paper className={classes.editorpaper}>
+            <EditorComponent />
+          </Paper>
         </Grid>
       </Grid>
     </div>

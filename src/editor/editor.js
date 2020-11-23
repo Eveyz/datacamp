@@ -1,10 +1,10 @@
-import Editor, { monaco } from '@monaco-editor/react'
+import Editor from '@monaco-editor/react'
 import React, { useRef, useState } from 'react'
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { purple } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles'
-import { FiberManualRecordSharp, Replay } from '@material-ui/icons'
+import { Replay } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -18,20 +18,31 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
-  button: {
-    marginRight: theme.spacing(1),
-    backgroundColor: purple[500],
-    color: 'white',
+  replay: {
+    color: '#03EF62',
     '&:hover': {
-      backgroundColor: purple[600],
+      color: "rgba(3,239,98,0.8)",
       boxShadow: 'none',
     },
   },
-  replay: {
-    color: 'white',
-    outline: '1px solid #4caf50',
-    marginRight: theme.spacing(1),
-    borderRadius: '4px'
+  button: {
+    marginRight: theme.spacing(2),
+    border: "1px solid #03EF62",
+    color: "#03EF62",
+    '&:hover': {
+      boxShadow: 'none',
+      opacity: 0.8
+    },
+  },
+  submitbutton: {
+    marginRight: theme.spacing(2),
+    backgroundColor: "rgb(3,239,98)",
+    color: '#05192D',
+    fontWeight: 'bold',
+    '&:hover': {
+      backgroundColor: "rgba(3,239,98,0.8)",
+      boxShadow: 'none',
+    },
   }
 }));
 
@@ -68,9 +79,18 @@ const EditorComponent = props => {
         }}
       />
       <div className={classes.bottom}>
-        <Button variant="outlined" onClick={showValue} disabled={!isEditorReady} className={classes.replay} startIcon={<Replay />}></Button>
-        <Button onClick={showValue} disabled={!isEditorReady} className={classes.button}>运行</Button>
-        <Button onClick={showValue} disabled={!isEditorReady} className={classes.button}>提交答案</Button>
+        <IconButton className={classes.replay} aria-label="刷新">
+          <Replay />
+        </IconButton>
+        <Button 
+          variant="outlined" 
+          onClick={showValue}
+          disabled={!isEditorReady}
+          className={classes.button}
+        >
+          运行
+        </Button>
+        <Button onClick={showValue} disabled={!isEditorReady} className={classes.submitbutton}>提交答案</Button>
       </div>
         
     </>
