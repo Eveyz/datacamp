@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  editorpaper: {
+    backgroundColor: '#05192D'
+  }
 }));
 
 const CoursePage = props => {
@@ -33,7 +36,7 @@ const CoursePage = props => {
           </Paper>
         </Grid>
         <Grid item xs={7}>
-          <Paper><EditorComponent /></Paper>
+          <Paper className={classes.editorpaper}><EditorComponent /></Paper>
         </Grid>
       </Grid>
     </div>
