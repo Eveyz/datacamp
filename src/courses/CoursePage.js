@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px 10px 0 10px"
   },
   paper: {
-    padding: theme.spacing(2),
     backgroundColor: 'rgb(229, 225, 218)'
   },
   editorpaper: {

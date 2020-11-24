@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
-import { purple, teal } from '@material-ui/core/colors'
+import { teal } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +30,7 @@ const CourseHeader = props => {
       <AppBar position="static">
         <Toolbar className={classes.appbar}>
           <Typography variant="h6" className={classes.title}>
-            News
+            学编程
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

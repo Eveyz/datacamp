@@ -88,7 +88,7 @@ const EditorComponent = props => {
           disabled={!isEditorReady}
           className={classes.button}
         >
-          运行
+          运行代码
         </Button>
         <Button onClick={showValue} disabled={!isEditorReady} className={classes.submitbutton}>提交答案</Button>
       </div>
