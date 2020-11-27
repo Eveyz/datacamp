@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import EditorComponent from '../editor/editor'
-import CoursePage from '../courses/CoursePage'
+
+const EditorComponent = React.lazy(() => import('../editor/editor'))
+const CoursePage = React.lazy(() => import('../courses/CoursePage'))
 
 const Mainpage = props => {
   return (
@@ -9,10 +9,6 @@ const Mainpage = props => {
       <CoursePage />
     </div>
   );
-};
-
-Mainpage.propTypes = {
-  
 };
 
 export default Mainpage;

@@ -2,9 +2,10 @@ import React from 'react';
 import EditorComponent from '../editor/editor'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import CourseHeader from '../layouts/CourseHeader'
-import CourseStepContent from './CourseStepContent'
 import { makeStyles } from '@material-ui/core/styles'
+
+const CourseHeader = React.lazy(() => import('../layouts/CourseHeader'))
+const CourseStepContent = React.lazy(() => import('./CourseStepContent'))
 
 const useStyles = makeStyles((theme) => ({
   root: {
