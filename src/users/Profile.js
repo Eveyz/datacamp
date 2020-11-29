@@ -38,8 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const drawerWidth = 240;
-
 const Profile = props => {
 
   const classes = useStyles()

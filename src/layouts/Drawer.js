@@ -35,11 +35,16 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
       fontWeight: '550'
     },
+  },
+  linkStyle: {
+    textDecoration: 'none'
   }
 }));
 
 const ProfileDrawer = props => {
   const classes = useStyles()
+
+  console.log(props)
 
   return (
     <Drawer
@@ -53,16 +58,16 @@ const ProfileDrawer = props => {
       <div className={classes.drawerContainer}>
         <br/>
         <List>
-          <Link to="/">
+          <Link to="/" className={classes.linkStyle}>
             <ListItem button key={'学习进度'} selected={true} classes={{ selected: classes.selected }} className={classes.listItem}>
               <ListItemIcon><Mail /></ListItemIcon>
               <ListItemText primary={'学习进度'} />
             </ListItem>
           </Link>
-          <Link to="/">
-            <ListItem button key={'我的书签'} classes={{ selected: classes.selected }} className={classes.listItem}>
+          <Link to="/my-bookmarks" className={classes.linkStyle}>
+            <ListItem button key={'我的收藏'} classes={{ selected: classes.selected }} className={classes.listItem}>
               <ListItemIcon><Bookmarks /></ListItemIcon>
-              <ListItemText primary={'我的书签'} />
+              <ListItemText primary={'我的收藏'} />
             </ListItem>
           </Link>
         </List>
@@ -79,7 +84,7 @@ const ProfileDrawer = props => {
         </List>
         <Divider />
         <List>
-          <Link to="/courses">
+          <Link to="/courses" className={classes.linkStyle}>
             <ListItem button key={'所有课程'} classes={{ selected: classes.selected }} className={classes.listItem}>
               <ListItemIcon><BusinessCenter /></ListItemIcon>
               <ListItemText primary={'所有课程'} />

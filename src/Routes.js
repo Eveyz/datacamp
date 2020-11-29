@@ -8,6 +8,7 @@ const Account = React.lazy(() => import('./users/Account'))
 const Course = React.lazy(() => import('./courses/Course'))
 const Courses = React.lazy(() => import('./courses/Courses'))
 const MainPage = React.lazy(() => import('./layouts/Mainpage'))
+const Bookmarks = React.lazy(() => import('./users/Bookmarks'))
 
 const Routes = props => {
   return (
@@ -15,6 +16,7 @@ const Routes = props => {
       <Route exact path='/' component={MainPage}></Route>
       <Route exact path='/courses' component={Courses}></Route>
       <Route exact path='/courses/:_id' component={Course}></Route>
+      <Route exact path='/my-bookmarks' component={Bookmarks}></Route>
       <Route exact path='/profile' component={Profile}></Route>
       <Route exact path='/account' component={Account}></Route>
     </Switch>
