@@ -1,40 +1,33 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
-import Divider from '@material-ui/core/Divider'
+import { teal } from '@material-ui/core/colors'
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+import Divider from '@material-ui/core/Divider'
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import SettingsIcon from '@material-ui/icons/Settings';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { teal } from '@material-ui/core/colors'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import SettingsIcon from '@material-ui/icons/Settings';
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
   },
   toolbar: {
     backgroundColor: teal[500]
+  },
+  grow: {
+    flexGrow: 1,
   },
   search: {
     position: 'relative',
@@ -87,8 +80,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
-  const classes = useStyles();
+const ProfileHeader = props => {
+  const classes = useStyles()
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -96,12 +90,7 @@ export default function Header() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
-    console.log("why not open")
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
@@ -111,6 +100,10 @@ export default function Header() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = 'primary-search-account-menu';
@@ -188,20 +181,13 @@ export default function Header() {
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
+    <div>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             学编程
           </Typography>
+          <div className={classes.grow} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -215,7 +201,6 @@ export default function Header() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
@@ -250,4 +235,6 @@ export default function Header() {
       {renderMenu}
     </div>
   );
-}
+};
+
+export default ProfileHeader;
