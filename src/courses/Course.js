@@ -10,6 +10,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import Header from '../users/ProfileHeader'
 
 const Drawer = React.lazy(() => import('../layouts/Drawer'))
+const CourseChapter = React.lazy(() => import('./CourseChapter'))
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   button: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4)
   },
   bookMarkButton: {
     marginLeft: theme.spacing(2),
@@ -112,26 +115,10 @@ const Course = props => {
                   Python is a general-purpose programming language that is becoming ever more popular for data science. Companies worldwide are using Python to harvest insights from their data and gain a competitive edge. Unlike other Python tutorials, this course focuses on Python specifically for data science. In our Introduction to Python course, you’ll learn about powerful ways to store and manipulate data, and helpful data science tools to begin conducting your own analyses. Start DataCamp’s online Python curriculum now.
                 </Typography>
                 <Grid container spacing={3}>
-                  <Grid item xs={12}>
-                    <Card className={classes.root}>
-                      <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                          Word of the Day
-                        </Typography>
-                        <Typography className={classes.pos} color="textSecondary">
-                          adjective
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                          well meaning and kindly.
-                          <br />
-                          {'"a benevolent smile"'}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small">Learn More</Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
+                  <CourseChapter />
+                  <CourseChapter />
+                  <CourseChapter />
+                  <CourseChapter />
                 </Grid>
               </Grid>
               <Grid item xs={3}>
@@ -156,6 +143,8 @@ const Course = props => {
               </Grid>
             </Grid>
           </Container>
+          <br></br>
+          <br></br>
         </main>
       </div>
     </div>
