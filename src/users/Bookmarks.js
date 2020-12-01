@@ -1,5 +1,5 @@
 import React from 'react';
-import { CssBaseline, makeStyles, Grid, Container, Typography, Card, CardContent, CardHeader, Avatar, LinearProgress, Button, Divider, Toolbar } from '@material-ui/core'
+import { makeStyles, Grid, Container, Typography, Avatar, Button } from '@material-ui/core'
 import { Search, Bookmark } from '@material-ui/icons'
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
@@ -22,7 +22,7 @@ const Bookmarks = props => {
 
   return (
     <div>
-      <DrawerContent>
+      <DrawerContent match={props.match}>
         <Container maxWidth="lg">
           <Typography variant="h5" gutterBottom>我的收藏</Typography>
           <br/>

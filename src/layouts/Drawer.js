@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Drawer, Toolbar, List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
-import { MoveToInbox, Mail, Bookmarks, AccountTree, Assignment, Assessment, BusinessCenter, TrackChanges, FitnessCenter } from '@material-ui/icons'
-import { teal } from '@material-ui/core/colors';
+import { Mail, Bookmarks, AccountTree, Assignment, Assessment, BusinessCenter, TrackChanges, FitnessCenter } from '@material-ui/icons'
+// import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom'
 
 const drawerWidth = 220;
@@ -44,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
 const ProfileDrawer = props => {
   const classes = useStyles()
 
-  console.log(props)
-
   return (
     <Drawer
       className={classes.drawer}
@@ -58,14 +56,14 @@ const ProfileDrawer = props => {
       <div className={classes.drawerContainer}>
         <br/>
         <List>
-          <Link to="/" className={classes.linkStyle}>
-            <ListItem button key={'学习进度'} selected={true} classes={{ selected: classes.selected }} className={classes.listItem}>
+          <Link to="/learn" className={classes.linkStyle}>
+            <ListItem button key={'学习进度'} selected={props.match.path === "/learn"} classes={{ selected: classes.selected }} className={classes.listItem}>
               <ListItemIcon><Mail /></ListItemIcon>
               <ListItemText primary={'学习进度'} />
             </ListItem>
           </Link>
           <Link to="/my-bookmarks" className={classes.linkStyle}>
-            <ListItem button key={'我的收藏'} classes={{ selected: classes.selected }} className={classes.listItem}>
+            <ListItem button key={'我的收藏'} selected={props.match.path === "/my-bookmarks"} classes={{ selected: classes.selected }} className={classes.listItem}>
               <ListItemIcon><Bookmarks /></ListItemIcon>
               <ListItemText primary={'我的收藏'} />
             </ListItem>
@@ -85,7 +83,7 @@ const ProfileDrawer = props => {
         <Divider />
         <List>
           <Link to="/courses" className={classes.linkStyle}>
-            <ListItem button key={'所有课程'} classes={{ selected: classes.selected }} className={classes.listItem}>
+            <ListItem button key={'所有课程'} selected={props.match.path === "/courses"} classes={{ selected: classes.selected }} className={classes.listItem}>
               <ListItemIcon><BusinessCenter /></ListItemIcon>
               <ListItemText primary={'所有课程'} />
             </ListItem>

@@ -52,8 +52,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const drawerWidth = 240;
-
 const Course = props => {
 
   const classes = useStyles()
@@ -63,7 +61,7 @@ const Course = props => {
       <div className={classes.root}>
         <CssBaseline />
         <Header />
-        <Drawer />
+        <Drawer match={props.match} />
         <main className={classes.content}>
           <Toolbar />
           <Grid container spacing={3}>

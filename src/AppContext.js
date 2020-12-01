@@ -25,30 +25,15 @@ const AppContextProvider = (props) => {
       if(t - user.exp >= 0) {
         setState({ 
           auth: false,
-          current_user: null,
-          current_course: null,
-          current_teacher: null,
-          current_student: null,
-          current_report: null
         })
       } else {
         setState({
           auth: true,
-          current_user: user,
-          current_course: null,
-          current_teacher: current_teacher,
-          current_student: current_student,
-          current_report: null,
         })
       }
     } else {
       setState({
         auth: false,
-        current_user: null,
-        current_course: null,
-        current_teacher: null,
-        current_student: null,
-        current_report: null
       })
     }
   }, [])

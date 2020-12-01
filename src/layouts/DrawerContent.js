@@ -23,7 +23,7 @@ const DrawerContent = props => {
       <div className={classes.root}>
         <CssBaseline />
         <ProfileHeader />
-        <Drawer />
+        <Drawer match={props.match} />
         <main className={classes.content}>
           <Toolbar />
           {props.children}

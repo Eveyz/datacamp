@@ -56,13 +56,13 @@ const Courses = props => {
 
   return (
     <div>
-      <DrawerContent>
+      <DrawerContent match={props.match}>
         <Container maxWidth="lg">
           <Typography variant="h5" gutterBottom>300个课程</Typography>
           <Grid container spacing={3}>
             <Grid item xs={4}>
-              <Link to='/courses/1' className={classes.linkStyle}>
-                <Card>
+              <Card>
+                <Link to='/courses/1' className={classes.linkStyle}>
                   <CardHeader
                     avatar={
                       <Avatar aria-label="recipe" src={Python} />
@@ -84,14 +84,14 @@ const Courses = props => {
                       </div>
                     </Grid>
                   </CardContent>
-                  <Divider/>
-                  <CardContent>
-                    <Link to='courses/1' className={classes.linkStyle}>
-                      <Button variant="outlined" size="large" className={classes.button}>继续学习</Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              </Link>
+                </Link>
+                <Divider/>
+                <CardContent>
+                  <Link to='courses/1' className={classes.linkStyle}>
+                    <Button variant="outlined" size="large" className={classes.button}>继续学习</Button>
+                  </Link>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item xs={4}>
               <Card>

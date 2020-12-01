@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import {AppContextProvider} from './AppContext'
-// import Loading from './Loading'
 import { Backdrop, CircularProgress, makeStyles } from '@material-ui/core'
 
 const Routes = React.lazy(() => import('./Routes'))
