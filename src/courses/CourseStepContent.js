@@ -7,6 +7,7 @@ import { amber } from '@material-ui/core/colors'
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects'
 import Chip from '@material-ui/core/Chip'
 import EventNoteIcon from '@material-ui/icons/EventNote'
+import parse from 'html-react-parser'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -51,6 +52,9 @@ const useStyles = makeStyles((theme) => ({
   ul: {
     paddingLeft: theme.spacing(2)
   },
+  li: {
+    marginBottom: theme.spacing(1)
+  },
   icon: {
     marginRight: theme.spacing(1)
   }
@@ -67,15 +71,8 @@ const CourseStepContent = props => {
         </Grid>
       </div>
       <div className={classes.section}>
-        <Typography variant="h5">载入一个DataFrame</Typography>
-        <Typography variant="subtitle1">The code in the script editor should plot information from the DataFrame that we loaded in the previous exercise.
-
-          However, there is an error in function syntax. Remember that common function errors include:
-
-          Forgetting closing parenthesis
-          Forgetting commas between each argument
-          Note that all arguments to the functions are correct. The problem is in the function syntax.
-        </Typography>
+        <Typography variant="h5">{props.section.title}</Typography>
+        <Typography variant="subtitle1">{parse(props.section.content)}</Typography>
       </div>
       <div className={classes.padding}>
         <Grid
@@ -85,12 +82,16 @@ const CourseStepContent = props => {
           alignItems="center"
         >
           <Typography variant="subtitle1">指导</Typography>
-          <Chip label="100XP" size="small" className={classes.chip} />
+          <Chip label={`${props.section.points}积分`} size="small" className={classes.chip} />
         </Grid>
       </div>
       <div className={classes.instruction}>
         <ul className={classes.ul}>
-          <li>使用pd.read_csv来从一个叫ransom.csv的CSV文件中加载数据。这个文件记录了每一个字母在ransom给Bayes的信件的频率。</li>
+          {
+            props.section.instructions.map((instruction, idx) => {
+              return <li key={idx} className={classes.li}>{parse(instruction)}</li>
+            })
+          }
         </ul>
         <Button variant="outlined" startIcon={<EmojiObjectsIcon />} className={classes.button}>使用提示 -30XP</Button>
       </div>

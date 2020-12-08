@@ -6,8 +6,13 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import { teal } from '@material-ui/core/colors'
 
+import { Link } from 'react-router-dom'
+
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexGrow: 1,
+  },
+  grow: {
     flexGrow: 1,
   },
   menuButton: {
@@ -29,9 +34,12 @@ const CourseHeader = props => {
     <div>
       <AppBar position="static">
         <Toolbar className={classes.appbar}>
-          <Typography variant="h6" className={classes.title}>
-            学编程
-          </Typography>
+          <Link to={"/learn"} className="clean-link">
+            <Typography variant="h6" className={classes.title}>
+              学编程
+            </Typography>
+          </Link>
+          <div className={classes.grow} />
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

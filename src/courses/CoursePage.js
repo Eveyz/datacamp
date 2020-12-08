@@ -31,7 +31,7 @@ const CoursePage = props => {
       <Grid container spacing={1} className={classes.container}>
         <Grid item xs={5}>
           <Paper className={classes.paper}>
-            <CourseStepContent />
+            <CourseStepContent section={props.section} />
           </Paper>
         </Grid>
         <Grid item xs={7}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { withStyles, makeStyles, Card, CardHeader, Avatar, CardContent, Grid, Typography, Button, LinearProgress, Divider } from '@material-ui/core'
-import { teal } from '@material-ui/core/colors'
+import { teal, blue } from '@material-ui/core/colors'
 import Python from '../images/python.svg'
 import R from '../images/r.svg'
 
@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: teal[600],
     },
   },
+  avatar: {
+    backgroundColor: blue[500],
+    fontSize: '14px'
+  },
 }));
 
 const CustomLinearProgress = withStyles((theme) => ({
@@ -38,21 +42,33 @@ const CustomLinearProgress = withStyles((theme) => ({
 const CourseCard = props => {
   const classes = useStyles()
 
+  const getTitle = () => {
+    switch(props.course.language) {
+      case 'Python':
+        return Python;
+      case 'R':
+        return R;
+      default:
+        return props.course.language;
+    }
+  }
+
   return (
-    <Link to="/courses/1" className="clean-link">
-      <Card>
+    <Card>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" src={R} />
+            <Avatar aria-label="recipe" src={getTitle()} className={props.course.language !== "Python" && props.course.language !== "R" ? classes.avatar : ""} />
           }
-          title="R"
+          title={props.course.language}
           // subheader="September 14, 2016"
         />
         <CardContent className={classes.card}>
-          <div className={classes.card}>
-            <Typography variant="h5">Introduction to Python</Typography>
-            <Typography variant="subtitle1">Master the basic of data analysis in Python. Expand</Typography>
-          </div>
+          <Link to={`/courses/${props.course._id.$oid}`} className="clean-link">
+            <div className={classes.card}>
+              <Typography variant="h5">{props.course.name}</Typography>
+              <Typography variant="subtitle1">{props.course.description}</Typography>
+            </div>
+          </Link>
           <Grid container direction="row" justify="flex-start" alignItems="center">
             <Typography variant="subtitle1" color="textSecondary">
               8%
@@ -67,7 +83,6 @@ const CourseCard = props => {
           <Button variant="outlined" size="large" className={classes.button}>继续学习</Button>
         </CardContent>
       </Card>
-    </Link>
   );
 };
 

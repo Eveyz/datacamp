@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, makeStyles, Grid, Card, CardContent, Typography, Avatar, Divider, Button, LinearProgress, Toolbar, Chip, Accordion, AccordionSummary, AccordionDetails, List } from '@material-ui/core';
+import { withStyles, makeStyles, Grid, Card, CardContent, Typography, Avatar, Button, LinearProgress, Toolbar, Chip, Accordion, AccordionSummary, List } from '@material-ui/core';
 import { teal, yellow } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
@@ -70,7 +70,7 @@ const CourseChapter = props => {
           <Toolbar className={classes.toolbar}>
             <Avatar className={classes.avatar}>1</Avatar>
             <Typography className={classes.title}>
-              Python基础知识
+              {props.chapter.name}
             </Typography>
             <Chip size="small" label={'免费'} className={classes.chip} />
             <div className={classes.grow} />
@@ -82,7 +82,7 @@ const CourseChapter = props => {
             </div>
           </Toolbar>
           <Typography gutterBottom>
-            An introduction to the basic concepts of Python. Learn how to use Python interactively and by using a script. Create your first variables and acquaint yourself with Python's basic data types.
+            {props.chapter.description}
           </Typography>
           <Button variant="contained" color="primary" size="large" className={classes.button}>继续学习</Button>
         </CardContent>
@@ -95,8 +95,11 @@ const CourseChapter = props => {
               <Typography variant="h6" className={classes.heading}>查看课程章节内容</Typography>
             </AccordionSummary>
             <List component="nav" aria-label="main mailbox folders">
-              <CourseStep />
-              <CourseStep />
+              {
+                props.chapter.sections.map((section, idx) => {
+                  return <CourseStep key={idx} section={section} />
+                })
+              }
             </List>
           </Accordion>
       </Card>
