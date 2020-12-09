@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { Replay } from '@material-ui/icons'
 
+import axios from '../axios'
+
 const useStyles = makeStyles((theme) => ({
   title: {
     paddingTop: theme.spacing(1),
@@ -50,6 +52,8 @@ const EditorComponent = props => {
   const classes = useStyles();
 
   const [isEditorReady, setIsEditorReady] = useState(false)
+  const [runResult, setRunResult] = useState(null)
+
   let valueGetter = useRef()
 
   const handleEditorDidMount = (_valueGetter) => {
@@ -59,8 +63,13 @@ const EditorComponent = props => {
 
   const showValue = () => {
     console.log(valueGetter.current())
-    console.log(valueGetter.current() instanceof String)
-    console.log(typeof valueGetter.current())
+    axios.post(`/api/v1/sections/run_code`, { "code": valueGetter.current() })
+    .then(res => {
+      setRunResult(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   return (
@@ -71,7 +80,7 @@ const EditorComponent = props => {
       <Editor 
         height="50vh" 
         language="python" 
-        value={"// Write your code here"}
+        value={"# Write your code here"}
         editorDidMount={handleEditorDidMount}
         theme="dark"
         options={{
