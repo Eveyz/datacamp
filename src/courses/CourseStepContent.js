@@ -1,19 +1,11 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
+import { makeStyles, Toolbar, Typography, Grid, Button, Chip } from '@material-ui/core'
 import { amber } from '@material-ui/core/colors'
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects'
-import Chip from '@material-ui/core/Chip'
 import EventNoteIcon from '@material-ui/icons/EventNote'
 import parse from 'html-react-parser'
 
 const useStyles = makeStyles((theme) => ({
-  content: {
-    height: "100vh",
-    overflow: 'scroll'
-  },
   section: {
     backgroundColor: 'white',
     padding: theme.spacing(2)
@@ -23,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(1),
-    minHeight: '100vh'
   },
   title: {
     paddingTop: theme.spacing(1),
@@ -45,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
+    backgroundColor: '#F6F5FA'
   },
   chip: {
     backgroundColor: amber[500]
@@ -57,6 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     marginRight: theme.spacing(1)
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  toolbar: {
+    minHeight: '48px',
+    backgroundColor: '#F6F5FA'
   }
 }));
 
@@ -74,17 +73,12 @@ const CourseStepContent = props => {
         <Typography variant="h5">{props.section.title}</Typography>
         <Typography variant="subtitle1">{parse(props.section.content)}</Typography>
       </div>
-      <div className={classes.padding}>
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="center"
-        >
-          <Typography variant="subtitle1">指导</Typography>
-          <Chip label={`${props.section.points}积分`} size="small" className={classes.chip} />
-        </Grid>
-      </div>
+      <Toolbar className={classes.toolbar}>
+        <EventNoteIcon fontSize="small" className={classes.icon} />
+        <Typography variant="subtitle1">指导</Typography>
+        <div className={classes.grow} />
+        <Chip label={`${props.section.points}积分`} size="small" className={classes.chip} />
+      </Toolbar>
       <div className={classes.instruction}>
         <ul className={classes.ul}>
           {

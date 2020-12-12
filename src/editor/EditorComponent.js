@@ -3,8 +3,8 @@ import React, { useRef, useState } from 'react'
 import IconButton from '@material-ui/core/Button'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import { Replay } from '@material-ui/icons'
+import { makeStyles, CircularProgress, Toolbar } from '@material-ui/core'
+import { Replay, Refresh } from '@material-ui/icons'
 
 import axios from '../axios'
 
@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'none',
     },
   },
+  replayDisable: {
+    color: '#03EF62',
+    opacity: 0.4
+  },
   button: {
     marginRight: theme.spacing(2),
     border: "1px solid #03EF62",
@@ -35,6 +39,13 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'none',
       opacity: 0.8
     },
+  },
+  disabledButton: {
+    marginRight: theme.spacing(2),
+    border: "1px solid #03EF62!important",
+    color: '#03EF62!important',
+    opacity: 0.4,
+    width: '90px'
   },
   submitbutton: {
     marginRight: theme.spacing(2),
@@ -45,6 +56,24 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "rgba(3,239,98,0.8)",
       boxShadow: 'none',
     },
+  },
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  wrapper: {
+    position: 'relative',
+  },
+  buttonProgress: {
+    color: '#03EF62',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+  grow: {
+    flexGrow: 1,
   }
 }));
 
@@ -52,7 +81,9 @@ const EditorComponent = props => {
   const classes = useStyles();
 
   const [isEditorReady, setIsEditorReady] = useState(false)
+  const [cnt, setCnt] = useState(0)
   const [runResult, setRunResult] = useState(null)
+  const [running, setRunning] = useState(false)
 
   let valueGetter = useRef()
 
@@ -63,13 +94,22 @@ const EditorComponent = props => {
 
   const showValue = () => {
     console.log(valueGetter.current())
+    setRunning(true)
     axios.post(`/api/v1/sections/run_code`, { "code": valueGetter.current() })
     .then(res => {
       setRunResult(res.data)
+      console.log(res.data)
+      props.runResult(res.data)
+      setRunning(false)
     })
     .catch(err => {
+      setRunning(false)
       console.log(err)
     })
+  }
+
+  const reset = () => {
+    setCnt(cnt + 1)
   }
 
   return (
@@ -77,31 +117,46 @@ const EditorComponent = props => {
       <div className={classes.title}>
         <Typography variant="subtitle2" style={{fontWeight: 'bold'}}>solution.py</Typography>
       </div>
-      <Editor 
-        height="50vh" 
+      <Editor
+        key={cnt}
+        height="48vh"
         language="python" 
-        value={"# Write your code here"}
+        value={props.prefix}
         editorDidMount={handleEditorDidMount}
         theme="dark"
         options={{
           "fontSize": '16px'
         }}
       />
-      <div className={classes.bottom}>
-        <IconButton className={classes.replay} aria-label="刷新">
-          <Replay />
+      <Toolbar style={{minHeight: '50px'}}>
+        <IconButton disabled={!isEditorReady || running} className={!isEditorReady || running ? classes.replayDisable : classes.replay} aria-label="刷新">
+          <Replay onClick={reset} />
         </IconButton>
-        <Button 
-          variant="outlined" 
-          onClick={showValue}
-          disabled={!isEditorReady}
-          className={classes.button}
-        >
-          运行代码
-        </Button>
-        <Button onClick={showValue} disabled={!isEditorReady} className={classes.submitbutton}>提交答案</Button>
-      </div>
-        
+        {
+          !isEditorReady || running ?
+          <div className={classes.root}>
+            <div className={classes.wrapper}>
+              <Button 
+                variant="outlined" 
+                disabled
+                className={classes.disabledButton}
+              >
+                运行中
+              </Button>
+              <CircularProgress size={20} className={classes.buttonProgress} />
+            </div>
+          </div>
+          :
+          <Button 
+            variant="outlined" 
+            onClick={showValue}
+            className={classes.button}
+          >
+            运行代码
+          </Button>
+        }
+        <Button onClick={showValue} disabled={!isEditorReady || running} className={classes.submitbutton}>提交答案</Button>
+      </Toolbar>
     </>
   );
 };
