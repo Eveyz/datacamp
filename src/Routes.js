@@ -21,7 +21,7 @@ const Routes = props => {
       <Route exact path='/learn' component={LearnPage} />
       <Route exact path='/courses' component={Courses} />
       <Route exact path='/courses/:_id' component={Course} />
-      <Route exact path='/sections/:_id' component={LearnCoding} />
+      <Route exact path='/courses/:course_id/chapters/:chapter_id/sections/:section_id' component={LearnCoding} />
       <Route exact path='/my-bookmarks' component={Bookmarks} />
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/account' component={Account} />

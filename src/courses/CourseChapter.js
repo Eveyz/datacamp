@@ -97,7 +97,7 @@ const CourseChapter = props => {
             <List component="nav" aria-label="main mailbox folders">
               {
                 props.chapter.sections.map((section, idx) => {
-                  return <CourseStep key={idx} section={section} />
+                  return <CourseStep key={idx} course_id={props.course_id} chapter_id={props.chapter.chapter_id.$oid} section={section} />
                 })
               }
             </List>

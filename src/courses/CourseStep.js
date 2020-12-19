@@ -28,7 +28,7 @@ const CourseStep = props => {
   }
 
   return (
-    <Link to={`/sections/${props.section.section_id.$oid}`} className="clean-link">
+    <Link to={`/courses/${props.course_id}/chapters/${props.chapter_id}/sections/${props.section.section_id.$oid}`} className="clean-link">
       <ListItem button>
         <ListItemIcon style={{minWidth: '35px'}}>
           {getIcon()}

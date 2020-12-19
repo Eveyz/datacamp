@@ -7,18 +7,21 @@ const CoursePage = React.lazy(() => import('../courses/CoursePage'))
 const CodeEditor = props => {
 
   const [loading, setLoading] = useState(true)
-  const [section, setSection] = useState(null)
+  const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get(`/api/v1/sections/${props.match.params._id}`)
-    .then(res => {
-      setSection(res.data)
+    async function fetchData() {
+      const [chapterResponse, progressResponse] = await Promise.all([
+        axios.get(`/api/v1/chapters/${props.match.params.chapter_id}`),
+        axios.get(`/api/v1/courses/${props.match.params.course_id}`)
+      ])
+      setData({
+        chapter: chapterResponse.data,
+        progress: progressResponse.data
+      })
       setLoading(false)
-    })
-    .catch(err => {
-      console.log(err)
-      setLoading(false)
-    })
+    }
+    fetchData()
   }, [])
 
   if(loading) {
@@ -27,7 +30,7 @@ const CodeEditor = props => {
 
   return (
     <div>
-      <CoursePage section={section}/>
+      <CoursePage course_id={props.match.params.course_id} progress={data.progress} chapter={data.chapter} section={data.chapter.sections.find(section => section._id.$oid === props.match.params.section_id)} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#F6F5FA'
   },
   editorpaper: {
-    backgroundColor: '#05192D'
+    backgroundColor: '#15141F'
   }
 }));
 
@@ -34,7 +34,7 @@ const CoursePage = props => {
 
   return (
     <div>
-      <CourseHeader />
+      <CourseHeader course_id={props.course_id} chapter={props.chapter} section={props.section} />
       <Grid container spacing={1} className={classes.container}>
         <Grid item xs={5}>
           <Paper style={{height: '92vh', overflow: 'scroll'}}>
@@ -42,8 +42,8 @@ const CoursePage = props => {
           </Paper>
         </Grid>
         <Grid item xs={7} style={{height: '92vh'}}>
-          <Paper className={classes.editorpaper} style={{marginBottom: '5px'}}>
-            <EditorComponent prefix={props.section.prefix} runResult={runResult} />
+          <Paper className={classes.editorpaper} style={{marginBottom: '2px'}}>
+            <EditorComponent sample_code={props.section.sample_code} runResult={runResult} />
           </Paper>
           <Paper className={classes.editorpaper}>
             <ShellOutput result={res} />

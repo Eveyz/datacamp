@@ -21,20 +21,20 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
   },
   replay: {
-    color: '#03EF62',
+    color: 'white',
     '&:hover': {
-      color: "rgba(3,239,98,0.8)",
+      // color: "rgba(3,239,98,0.8)",
       boxShadow: 'none',
     },
   },
   replayDisable: {
-    color: '#03EF62',
+    color: 'white!important',
     opacity: 0.4
   },
   button: {
     marginRight: theme.spacing(2),
-    border: "1px solid #03EF62",
-    color: "#03EF62",
+    border: "1px solid #7986cb",
+    color: "#7986cb",
     '&:hover': {
       boxShadow: 'none',
       opacity: 0.8
@@ -42,19 +42,19 @@ const useStyles = makeStyles((theme) => ({
   },
   disabledButton: {
     marginRight: theme.spacing(2),
-    border: "1px solid #03EF62!important",
-    color: '#03EF62!important',
+    border: "1px solid #7986cb!important",
+    color: '#7986cb!important',
     opacity: 0.4,
     width: '90px'
   },
   submitbutton: {
     marginRight: theme.spacing(2),
-    backgroundColor: "rgb(3,239,98)",
-    color: '#05192D',
+    backgroundColor: "#3f51b5",
+    color: 'white',
+    width: '90px',
     fontWeight: 'bold',
     '&:hover': {
-      backgroundColor: "rgba(3,239,98,0.8)",
-      boxShadow: 'none',
+      backgroundColor: "#5c6bc0",
     },
   },
   root: {
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
   },
   buttonProgress: {
-    color: '#03EF62',
+    color: '#3f51b5',
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -121,7 +121,7 @@ const EditorComponent = props => {
         key={cnt}
         height="48vh"
         language="python" 
-        value={props.prefix}
+        value={props.sample_code}
         editorDidMount={handleEditorDidMount}
         theme="dark"
         options={{
@@ -141,7 +141,7 @@ const EditorComponent = props => {
                 disabled
                 className={classes.disabledButton}
               >
-                运行中
+                运行中...
               </Button>
               <CircularProgress size={20} className={classes.buttonProgress} />
             </div>

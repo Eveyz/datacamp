@@ -3,6 +3,7 @@ import { makeStyles, Toolbar, Typography, Grid, Button, Chip } from '@material-u
 import { amber } from '@material-ui/core/colors'
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects'
 import EventNoteIcon from '@material-ui/icons/EventNote'
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import parse from 'html-react-parser'
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +75,7 @@ const CourseStepContent = props => {
         <Typography variant="subtitle1">{parse(props.section.content)}</Typography>
       </div>
       <Toolbar className={classes.toolbar}>
-        <EventNoteIcon fontSize="small" className={classes.icon} />
+        <PlaylistAddCheckIcon fontSize="small" className={classes.icon} />
         <Typography variant="subtitle1">指导</Typography>
         <div className={classes.grow} />
         <Chip label={`${props.section.points}积分`} size="small" className={classes.chip} />
@@ -87,7 +88,7 @@ const CourseStepContent = props => {
             })
           }
         </ul>
-        <Button variant="outlined" startIcon={<EmojiObjectsIcon />} className={classes.button}>使用提示 -30XP</Button>
+        <Button variant="outlined" startIcon={<EmojiObjectsIcon />} className={classes.button}>使用提示 -30积分</Button>
       </div>
     </div>
   );

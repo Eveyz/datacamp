@@ -62,6 +62,7 @@ const Course = props => {
   useEffect(() => {
     axios.get(`/api/v1/courses/${props.match.params._id}`)
     .then(res => {
+      console.log(res.data)
       setCourse(res.data)
       setLoading(false)
     })
@@ -134,7 +135,7 @@ const Course = props => {
                   <Grid container spacing={3}>
                     {
                       course.chapters.map((chapter, idx) => {
-                        return <CourseChapter key={idx} chapter={chapter} />
+                        return <CourseChapter key={idx} course_id={course._id.$oid} chapter={chapter} />
                       })
                     }
                   </Grid>

@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingBottom: theme.spacing(1),
     color: 'white',
-    backgroundColor: '#213147'
+    backgroundColor: '#15141F'
   }
 }));
 
@@ -20,7 +20,7 @@ const ShellOutput = props => {
       <div className={classes.title}>
         <Typography variant="subtitle2" style={{fontWeight: 'bold'}}>Shell</Typography>
       </div>
-      <div style={{overflowY: 'scroll', height: '30vh', padding: '10px', backgroundColor: '#05192D'}}>
+      <div style={{overflowY: 'scroll', height: '30vh', padding: '10px', backgroundColor: '#202124'}}>
         {
           props.result ?
           props.result.stderr ?
