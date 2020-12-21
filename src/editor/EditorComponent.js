@@ -108,6 +108,25 @@ const EditorComponent = props => {
     })
   }
 
+  const submitAnswer = () => {
+    setRunning(true)
+    axios.post(`/api/v1/user_progresses/submit_answer`, { 
+      "user_id": props.course_id,
+      "course_id": props.course_id,
+      "last_attempt": valueGetter.current() 
+    })
+    .then(res => {
+      setRunResult(res.data)
+      console.log(res.data)
+      props.runResult(res.data)
+      setRunning(false)
+    })
+    .catch(err => {
+      setRunning(false)
+      console.log(err)
+    })
+  }
+
   const reset = () => {
     setCnt(cnt + 1)
   }
@@ -155,7 +174,7 @@ const EditorComponent = props => {
             运行代码
           </Button>
         }
-        <Button onClick={showValue} disabled={!isEditorReady || running} className={classes.submitbutton}>提交答案</Button>
+        <Button onClick={submitAnswer} disabled={!isEditorReady || running} className={classes.submitbutton}>提交答案</Button>
       </Toolbar>
     </>
   );

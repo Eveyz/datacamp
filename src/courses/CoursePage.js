@@ -43,7 +43,7 @@ const CoursePage = props => {
         </Grid>
         <Grid item xs={7} style={{height: '92vh'}}>
           <Paper className={classes.editorpaper} style={{marginBottom: '2px'}}>
-            <EditorComponent sample_code={props.section.sample_code} runResult={runResult} />
+            <EditorComponent course_id={props.course_id} sample_code={props.section.sample_code} runResult={runResult} />
           </Paper>
           <Paper className={classes.editorpaper}>
             <ShellOutput result={res} />

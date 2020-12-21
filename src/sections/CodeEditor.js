@@ -13,7 +13,7 @@ const CodeEditor = props => {
     async function fetchData() {
       const [chapterResponse, progressResponse] = await Promise.all([
         axios.get(`/api/v1/chapters/${props.match.params.chapter_id}`),
-        axios.get(`/api/v1/courses/${props.match.params.course_id}`)
+        axios.get(`/api/v1/user_progresses?user_id=${props.match.params.course_id}&course_id=${props.match.params.course_id}&chapter_id=${props.match.params.chapter_id}&section_id=${props.match.params.section_id}`)
       ])
       setData({
         chapter: chapterResponse.data,

@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2)
   },
   li: {
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    color: '#191235'
   },
   icon: {
     marginRight: theme.spacing(1)
@@ -76,7 +77,7 @@ const CourseStepContent = props => {
       </div>
       <Toolbar className={classes.toolbar}>
         <PlaylistAddCheckIcon fontSize="small" className={classes.icon} />
-        <Typography variant="subtitle1">指导</Typography>
+        <Typography variant="subtitle1" style={{color: '#191235'}}>指导</Typography>
         <div className={classes.grow} />
         <Chip label={`${props.section.points}积分`} size="small" className={classes.chip} />
       </Toolbar>
