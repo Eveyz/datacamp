@@ -38,12 +38,20 @@ const CoursePage = props => {
       <Grid container spacing={1} className={classes.container}>
         <Grid item xs={5}>
           <Paper style={{height: '92vh', overflow: 'scroll'}}>
-            <CourseStepContent section={props.section} />
+            <CourseStepContent course_id={props.course_id} chapter_id={props.chapter._id} section={props.section} />
           </Paper>
         </Grid>
         <Grid item xs={7} style={{height: '92vh'}}>
           <Paper className={classes.editorpaper} style={{marginBottom: '2px'}}>
-            <EditorComponent course_id={props.course_id} sample_code={props.section.sample_code} runResult={runResult} />
+            <EditorComponent 
+              course_id={props.course_id}
+              chapter_id={props.chapter._id} 
+              section_id={props.section._id} 
+              chapter_progress={props.progress.chapters.find(chapter => chapter.chapter_id.$oid === props.chapter._id.$oid)}
+              points={props.section.points} 
+              sample_code={props.section.sample_code} 
+              runResult={runResult} 
+            />
           </Paper>
           <Paper className={classes.editorpaper}>
             <ShellOutput result={res} />

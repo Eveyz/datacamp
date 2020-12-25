@@ -1,5 +1,5 @@
 import Editor from '@monaco-editor/react'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import IconButton from '@material-ui/core/Button'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -84,15 +84,20 @@ const EditorComponent = props => {
   const [cnt, setCnt] = useState(0)
   const [runResult, setRunResult] = useState(null)
   const [running, setRunning] = useState(false)
+  const [sectionProgress, setSectionProgress] = useState(null)
 
   let valueGetter = useRef()
+
+  useEffect(() => {
+    setSectionProgress(props.chapter_progress.sections.find(section => section.section_id.$oid === props.section_id.$oid))
+  }, [])
 
   const handleEditorDidMount = (_valueGetter) => {
     setIsEditorReady(true)
     valueGetter.current = _valueGetter
   }
 
-  const showValue = () => {
+  const runCode = () => {
     console.log(valueGetter.current())
     setRunning(true)
     axios.post(`/api/v1/sections/run_code`, { "code": valueGetter.current() })
@@ -110,21 +115,36 @@ const EditorComponent = props => {
 
   const submitAnswer = () => {
     setRunning(true)
-    axios.post(`/api/v1/user_progresses/submit_answer`, { 
-      "user_id": props.course_id,
-      "course_id": props.course_id,
-      "last_attempt": valueGetter.current() 
-    })
-    .then(res => {
-      setRunResult(res.data)
-      console.log(res.data)
-      props.runResult(res.data)
-      setRunning(false)
-    })
-    .catch(err => {
-      setRunning(false)
-      console.log(err)
-    })
+    if(sectionProgress) {
+      let url = sectionProgress.completed ? `/api/v1/user_progresses/resubmit_answer` : `/api/v1/user_progresses/submit_answer`
+      axios.post(url, { 
+        "user_id": props.course_id,
+        "course_id": props.course_id,
+        "chapter_id": props.chapter_id.$oid,
+        "section_id": props.section_id.$oid,
+        "last_attempt": valueGetter.current(),
+        "points": sectionProgress.completed ? 0 : props.points,
+      })
+      .then(res => {
+        setRunResult(res.data)
+        console.log(res.data)
+        res.data.chapters.forEach(chapter => {
+          if(chapter.chapter_id.$oid === props.chapter_id.$oid) {
+            chapter.sections.forEach(section => {
+              if(section.section_id.$oid === props.section_id.$oid) {
+                setSectionProgress(section)
+                return
+              }
+            })
+          }
+        })
+        setRunning(false)
+      })
+      .catch(err => {
+        setRunning(false)
+        console.log(err)
+      })
+    }
   }
 
   const reset = () => {
@@ -168,7 +188,7 @@ const EditorComponent = props => {
           :
           <Button 
             variant="outlined" 
-            onClick={showValue}
+            onClick={runCode}
             className={classes.button}
           >
             运行代码

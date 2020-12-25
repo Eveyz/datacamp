@@ -85,8 +85,6 @@ const CourseHeader = props => {
     </Menu>
   );
 
-  console.log(props.section)
-
   return (
     <div>
       <AppBar position="static">

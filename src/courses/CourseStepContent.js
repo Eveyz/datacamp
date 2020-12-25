@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Toolbar, Typography, Grid, Button, Chip } from '@material-ui/core'
 import { amber } from '@material-ui/core/colors'
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects'
 import EventNoteIcon from '@material-ui/icons/EventNote'
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import parse from 'html-react-parser'
+import axios from '../axios'
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -63,6 +64,22 @@ const useStyles = makeStyles((theme) => ({
 
 const CourseStepContent = props => {
   const classes = useStyles();
+  const [hint, setHint] = useState(null)
+
+  const useHint = () => {
+    axios.post(`/api/v1/user_progresses/use_hint`, {
+      "user_id": props.course_id,
+      "course_id": props.course_id,
+      "chapter_id": props.chapter_id.$oid,
+      "section_id": props.section._id.$oid,
+    })
+    .then(res => {
+      setHint(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <div className={classes.content}>
@@ -89,7 +106,7 @@ const CourseStepContent = props => {
             })
           }
         </ul>
-        <Button variant="outlined" startIcon={<EmojiObjectsIcon />} className={classes.button}>使用提示 -30积分</Button>
+        <Button variant="outlined" startIcon={<EmojiObjectsIcon />} className={classes.button} onClick={useHint}>使用提示 -30积分</Button>
       </div>
     </div>
   );
