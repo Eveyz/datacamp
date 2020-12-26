@@ -31,6 +31,7 @@ const CoursePage = props => {
     // let all = res ? res + result.stdout + result.stderr : result.stdout + result.stderr
     setRes(result)
   }
+  console.log(props)
 
   return (
     <div>
