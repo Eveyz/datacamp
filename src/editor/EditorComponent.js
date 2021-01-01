@@ -127,7 +127,6 @@ const EditorComponent = props => {
       })
       .then(res => {
         setRunResult(res.data)
-        console.log(res.data)
         res.data.chapters.forEach(chapter => {
           if(chapter.chapter_id.$oid === props.chapter_id.$oid) {
             chapter.sections.forEach(section => {
@@ -160,7 +159,7 @@ const EditorComponent = props => {
         key={cnt}
         height="48vh"
         language="python" 
-        value={props.sample_code}
+        value={props.sample_code.replace(/↵/g, "\n")}
         editorDidMount={handleEditorDidMount}
         theme="dark"
         options={{

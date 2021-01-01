@@ -17,7 +17,7 @@ const Routes = props => {
   
   return (
     <Switch>
-      <Route exact path='/' component={LearnPage} />
+      <Route exact path='/' component={Courses} />
       <Route exact path='/learn' component={LearnPage} />
       <Route exact path='/courses' component={Courses} />
       <Route exact path='/courses/:_id' component={Course} />

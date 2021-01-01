@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { CircularProgress } from '@material-ui/core'
 import axios from '../axios'
+
+import LoadingPage from '../layouts/LoadingPage'
 
 const CoursePage = React.lazy(() => import('../courses/CoursePage'))
 
@@ -22,10 +23,10 @@ const CodeEditor = props => {
       setLoading(false)
     }
     fetchData()
-  }, [])
+  }, [props.match.url])
 
   if(loading) {
-    return <CircularProgress />
+    return <LoadingPage />
   }
 
   return (

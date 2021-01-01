@@ -7,6 +7,8 @@ import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import parse from 'html-react-parser'
 import axios from '../axios'
 
+import CourseHint from './CourseHint'
+
 const useStyles = makeStyles((theme) => ({
   section: {
     backgroundColor: 'white',
@@ -25,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   button: {
+    marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     border: "2px solid rgb(5, 25, 45)",
     color: "rgb(5, 25, 45)",
@@ -58,27 +61,30 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     minHeight: '48px',
-    backgroundColor: '#F6F5FA'
+    backgroundColor: '#F6F5FA',
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   }
 }));
 
 const CourseStepContent = props => {
   const classes = useStyles();
-  const [hint, setHint] = useState(null)
+  const [hint, setHint] = useState(false)
 
   const useHint = () => {
-    axios.post(`/api/v1/user_progresses/use_hint`, {
-      "user_id": props.course_id,
-      "course_id": props.course_id,
-      "chapter_id": props.chapter_id.$oid,
-      "section_id": props.section._id.$oid,
-    })
-    .then(res => {
-      setHint(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    // axios.post(`/api/v1/user_progresses/use_hint`, {
+    //   "user_id": props.course_id,
+    //   "course_id": props.course_id,
+    //   "chapter_id": props.chapter_id.$oid,
+    //   "section_id": props.section._id.$oid,
+    // })
+    // .then(res => {
+    //   setHint(true)
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
+    setHint(true)
   }
 
   return (
@@ -90,24 +96,34 @@ const CourseStepContent = props => {
       </div>
       <div className={classes.section}>
         <Typography variant="h5">{props.section.title}</Typography>
-        <Typography variant="subtitle1">{parse(props.section.content)}</Typography>
+        <Typography variant="subtitle1">{parse(props.section.content.replace(/(?:\r\n|\r|\n)/g, '<br />'))}</Typography>
       </div>
       <Toolbar className={classes.toolbar}>
         <PlaylistAddCheckIcon fontSize="small" className={classes.icon} />
         <Typography variant="subtitle1" style={{color: '#191235'}}>指导</Typography>
         <div className={classes.grow} />
-        <Chip label={`${props.section.points}积分`} size="small" className={classes.chip} />
+        {
+          hint ?
+          <Chip label={`${props.section.points - 30}分`} size="small" className={classes.chip} />
+          :
+          <Chip label={`${props.section.points}分`} size="small" className={classes.chip} />
+        }
       </Toolbar>
       <div className={classes.instruction}>
         <ul className={classes.ul}>
           {
             props.section.instructions.map((instruction, idx) => {
-              return <li key={idx} className={classes.li}>{parse(instruction)}</li>
+              return <li key={idx} className={classes.li}>{parse(instruction.replace(/(?:\r\n|\r|\n)/g, '<br />'))}</li>
             })
           }
         </ul>
-        <Button variant="outlined" startIcon={<EmojiObjectsIcon />} className={classes.button} onClick={useHint}>使用提示 -30积分</Button>
       </div>
+      {
+        hint ?
+        <CourseHint hint={props.section.hint} />
+        :
+        <Button variant="outlined" startIcon={<EmojiObjectsIcon />} className={classes.button} onClick={useHint}>使用提示 -30分</Button>
+      }
     </div>
   );
 };

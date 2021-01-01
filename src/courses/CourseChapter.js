@@ -63,8 +63,6 @@ const CourseChapter = props => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  console.log(props)
-
   return (
     <Grid item xs={12}>
       <Card>

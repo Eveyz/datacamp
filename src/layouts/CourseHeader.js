@@ -98,7 +98,7 @@ const CourseHeader = props => {
           <div className={classes.grow} />
           {
             props.section.prev_section ?
-            props.section.idx === 1 ?
+            props.section.section_number === 1 ?
             <Link to={`/courses/${props.course_id}/chapters/${props.section.prev_chapter.$oid}/sections/${props.section.prev_section.$oid}`}>
               <ChevronLeft />
             </Link>
@@ -109,10 +109,10 @@ const CourseHeader = props => {
             :
             <ChevronLeft className={classes.disableArrow} />
           }
-          <div style={{fontSize: '1.25rem', height: '32px', width: '100px', textAlign: 'center'}}>{props.section.idx}/{props.chapter.sections.length}</div>
+          <div style={{fontSize: '1.25rem', height: '32px', width: '100px', textAlign: 'center'}}>{props.section.section_number}/{props.chapter.sections.length}</div>
           {
             props.section.next_section ?
-            props.section.idx === props.chapter.sections.length ?
+            props.section.section_number === props.chapter.sections.length ?
             <Link to={`/courses/${props.course_id}/chapters/${props.section.next_chapter.$oid}/sections/${props.section.next_section.$oid}`}>
               <ChevronRight />
             </Link>
