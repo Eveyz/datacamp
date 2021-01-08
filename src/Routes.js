@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 // import axios from 'axios'
 // import { AppContext } from './AppContext'
 
+const CourseVideo = React.lazy(() => import('./courses/CourseVideo'))
 const Profile = React.lazy(() => import('./users/Profile'))
 const Account = React.lazy(() => import('./users/Account'))
 
@@ -23,6 +24,7 @@ const Routes = props => {
       <Route exact path='/courses/:_id' component={Course} />
       <Route exact path='/courses/:course_id/chapters/:chapter_id/sections/:section_id' component={CodeEditor} />
       <Route exact path='/my-bookmarks' component={Bookmarks} />
+      <Route exact path='/video' component={CourseVideo} />
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/account' component={Account} />
     </Switch>

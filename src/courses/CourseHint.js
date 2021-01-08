@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
     '& ul': {
       paddingLeft: theme.spacing(2),
       marginTop: '0px'
